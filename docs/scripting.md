@@ -162,7 +162,7 @@ post 방식은 아래와 같습니다:
 
 ### JSON
 
-If you are talking to APIs, the easiest way is going to be JSON because it doesn't require any extra dependencies. When making the `robot.http` call, you should usually set the  `Accept` header to give the API a clue that's what you are expecting back. Once you get the `body` back, you can parse it with `JSON.parse`:
+만약 당신이 APIs 에 말한다면, 가장 쉬운방법은 JSON 을 이용하는 것인데 그 이유는 어떤 추가적인 디펜던시가 필요 없기 때문입니다. `robot.http`을 만들어 호출 할때, 당신은 보통 당신이 돌려주기를 기대하는 것에 대한 실마리를 `Accept` 헤더에 API에 전달하기 위한 셋팅을 해야 합니다. 한번 `body`를 받으면, 너는 이것을 `JSON.parse`로 구문 분석을 할 수 있습니다.
 
 ```coffeescript
   robot.http("https://midnight-train")
@@ -174,7 +174,7 @@ If you are talking to APIs, the easiest way is going to be JSON because it doesn
       res.send "#{data.passenger} taking midnight train going #{data.destination}"
 ```
 
-It's possible to get non-JSON back, like if the API hit an error and it tries to render a normal HTML error instead of JSON. To be on the safe side, you should check the `Content-Type`, and catch any errors while parsing.
+이것은 API 가 오류가 발생하거나 JSON 이 아닌 일반 HTML 을 렌더하려고 시도할때 JSON 이 아닌 것으로 받을 가능성이 있습니다. 안전을 위해 당신은 `Content-Type`을 체크해야만 하고, 구문 분석하는 도중 어떤 에러라도 캐치해야 합니다.
 
 ```coffeescript
   robot.http("https://midnight-train")
