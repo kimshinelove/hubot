@@ -3,28 +3,31 @@ permalink: /docs/scripting/index.html
 layout: docs
 ---
 
-Hubot out of the box doesn't do too much but it is an extensible, scriptable robot friend. There are [hundreds of scripts written and maintained by the community](/docs/#scripts.md) and it's easy to write your own.  You can create a custom script in hubot's `scripts` directory or [create a script package](#creating-a-script-package) for sharing with the community!
+박스 밖에 있는 휴봇은 많은 것을 할 수 없으나, 이것은 확장 가능하고, 스크립팅 가능한 로봇 친구 입니다. [여기에](/docs/#scripts.md)에 커뮤티에서 작성되고 관리되는 수백개의 스크립트가 있으며 당신것을 작성하기도 쉽습니다. You can create a custom script in hubot's `scripts` directory or [create a script package](#creating-a-script-package) for sharing with the community!
 
 ## Anatomy of a script
 
-When you created your hubot, the generator also created a `scripts` directory. If you peek around there, you will see some examples of scripts. For a script to be a script, it needs to:
+당신의 휴봇을 만들었을때, `scripts` 디렉토리도 같이 생성됩니다. 만약 그곳을 들여다 보았다면 당신은 몇개의 예제 스크립트를 볼 수 있을 것입니다. 
 
-* live in a directory on the hubot script load path (`src/scripts` and `scripts` by default)
-* be a `.coffee` or `.js` file
+When you created your hubot, the generator also created a `scripts` directory. If you peek around there, you will see some examples of scripts. 이 스크립트들은 아래와 같은 것이 필요합니다:
+
+* 휴봇 스크립트 로드 경로에 있는 스크립트 (`src/scripts` and `scripts` by default)
+* `.coffee` or `.js` 확장자를 가진 파일
 * export a function
 
-By export a function, we just mean:
+우리에게 export a function 을 아래와 같은 것을 의미합니다:
 
 ```coffeescript
 module.exports = (robot) ->
   # your code here
 ```
 
-The `robot` parameter is an instance of your robot friend. At this point, we can start scripting up some awesomeness.
+`robot` 파라미터는 당신의 로봇 친구의 인스턴스입니다. 여기서 우리는 놀라운 무언가를 작성하기 시작할 수 있습니다.
 
 ## Hearing and responding
 
-Since this is a chat bot, the most common interactions are based on messages. Hubot can `hear` messages said in a room or `respond` to messages directly addressed at it. Both methods take a regular expression and a callback function as parameters. For example:
+채팅 봇일때부터 대부분의 공통적인 상호작용들은 메시지를 통해서 이루어 졌습니다. 휴봇은 대화방 안에 있는 메시지를 듣거나 직접적으로 응답 할 수 있습니다.
+정규식과 파라미터로 넘어온 콜백 함수를 사용합니다. 예를 들면:
 
 ```coffeescript
 module.exports = (robot) ->
@@ -35,29 +38,29 @@ module.exports = (robot) ->
     # your code here
 ```
 
-The `robot.hear /badger/` callback is called anytime a message's text matches. For example:
+이 `robot.hear /badger/` 는 언제든지 매칭된 문자가 있으면 콜백을 실행합니다. 예를 들어:
 
 * Stop badgering the witness
 * badger me
 * what exactly is a badger anyways
 
-The `robot.respond /open the pod bay doors/i` callback is only called for messages that are immediately preceded by the robot's name or alias. If the robot's name is HAL and alias is /, then this callback would be triggered for:
+이 `robot.respond /open the pod bay doors/i` 콜백은 오직 로봇의 이름이나 별명이 앞에 있는 메시지에 실행됩니다. 만약 로봇의 이름이 HAL이고  alias 가 / 라면, 이 콜백이 실행될 것입니다:
 
 *  hal open the pod bay doors
 * HAL: open the pod bay doors
 * @HAL open the pod bay doors
 * /open the pod bay doors
 
-It wouldn't be called for:
+아래와 같은 경우 실행되지 않습니다:
 
 * HAL: please open the pod bay doors
-   *  because its `respond` is bound to the text immediately following the robot name
+	* `respond`은 로봇의 이름 바로 텍스트가 따라 와야 합니다.
 *  has anyone ever mentioned how lovely you are when you open the pod bay doors?
-   * because it lacks the robot's name
+	* 로봇의 이름이 없어서 실행되지 않습니다.
 
 ## Send & reply
 
-The `res` parameter is an instance of `Response` (historically, this parameter was `msg` and you may see other scripts use it this way). With it, you can `send` a message back to the room the `res` came from, `emote` a message to a room (If the given adapter supports it), or `reply` to the person that sent the message. For example:
+이 `res` 파라미터는 `Response` 의 인스턴스입니다(역사적으로, 이 파라미터는 `msg`였고 다른 스크립트는 이 방법으로 사용이 불가능합니다.). 이것과 함께 당신은 `res`가 넘어온 방에 메시지를 `send` 하거나, `이모티콘` 을 방에 보내거나(만약 어댑터가 이 기능을 지원한다면), 사람에게 `대답` 할 수 있습니다. 예를 들어:
 
 ```coffeescript
 module.exports = (robot) ->
@@ -71,20 +74,21 @@ module.exports = (robot) ->
     res.emote "makes a freshly baked pie"
 ```
 
-The `robot.hear /badgers/` callback sends a message exactly as specified regardless of who said it, "Badgers? BADGERS? WE DON'T NEED NO STINKIN BADGERS".
+이 `robot.hear /badgers/` 콜백은 누가 이것을 말했는지 상관없이 "Badgers? BADGERS? WE DON'T NEED NO STINKIN BADGERS" 라는 메시지를 보냅니다.
 
-If a user Dave says "HAL: open the pod bay doors", `robot.respond /open the pod bay doors/i` callback sends a message "Dave: I'm afraid I can't let you do that."
+만약 Dave 라는 사용자가 "HAL: open the pod bay doors" 라고 말했다면 `robot.respond /open the pod bay doors/i` 콜백은 "Dave: I'm afraid I can't let you do that." 라는 메시지를 보냅니다.
 
 ## Capturing data
 
-So far, our scripts have had static responses, which while amusing, are boring functionality-wise. `res.match` has the result of `match`ing the incoming message against the regular expression. This is just a [JavaScript thing](http://www.w3schools.com/jsref/jsref_match.asp), which ends up being an array with index 0 being the full text matching the expression. If you include capture groups, those will be populated `res.match`. For example, if we update a script like:
+지금까지 우리는 심심하거나 지루할때 사용할만한 정해진 응답을 하는 스크립트를 만들었습니다. `res.match` 는 수신된 메시지를 정규식에 대한 `매칭`된 결과를 가지고 있습니다. 이것은 단지 [JavaScript thing](http://www.w3schools.com/jsref/jsref_match.asp)인데, 정규식에 의해 전체 텍스트가 일치하는 배열을 가지고 있습니다.
+만약 그룹을 캡쳐해서 포함한다면, 일반적으로 `res.match` 를 사용합니다. 예를 들어, 우리가 스크립트를 아래와 같이 수정한다면:
 
 ```coffeescript
   robot.respond /open the (.*) doors/i, (res) ->
     # your code here
 ```
 
-If Dave says "HAL: open the pod bay doors", then `res.match[0]` is "open the pod bay doors", and `res.match[1]` is just "pod bay". Now we can start doing more dynamic things:
+만약 Dave 가 "HAL: open the pod bay doors" 라고 말한다면, `res.match[0]` 에는 "open the pod bay doors"가 있고, `res.match[1]` 에는 단지 "pod bay" 만 있습니다. 이제 우리는 좀 더 다이나믹한 것을 시작 할 수 있습니다:
 
 ```coffeescript
   robot.respond /open the (.*) doors/i, (res) ->
@@ -97,8 +101,7 @@ If Dave says "HAL: open the pod bay doors", then `res.match[0]` is "open the pod
 
 ## Making HTTP calls
 
-Hubot can make HTTP calls on your behalf to integrate & consume third party APIs. This can be through an instance of [node-scoped-http-client](https://github.com/technoweenie/node-scoped-http-client) available at `robot.http`. The simplest case looks like:
-
+휴봇은 당신에게 이익이 되는 것을 통합하거나 서드파티 API 사용하는 HTTP 톨을 만들 수 있습니다. 이것은 `robot.http`에서 사용 가능한 [node-scoped-http-client](https://github.com/technoweenie/node-scoped-http-client) 인스턴스를 통해 할 수 있습니다. 간단한 케이스는 아래와 같습니다.:
 
 ```coffeescript
   robot.http("https://midnight-train")
@@ -106,7 +109,7 @@ Hubot can make HTTP calls on your behalf to integrate & consume third party APIs
       # your code here
 ```
 
-A post looks like:
+post 방식은 아래와 같습니다:
 
 ```coffeescript
   data = JSON.stringify({
@@ -118,8 +121,7 @@ A post looks like:
       # your code here
 ```
 
-
-`err` is an error encountered on the way, if one was encountered. You'll generally want to check for this and handle accordingly:
+`err`는 처리도중 에러가 발견될 때 발생합니다. 당신이 일반적으로 이것을 체크하고 핸들링하기 원한다면 아래와 같이 따라합니다.
 
 ```coffeescript
   robot.http("https://midnight-train")
@@ -130,7 +132,7 @@ A post looks like:
       # your code here, knowing it was successful
 ```
 
-`res` is an instance of node's [http.ServerResponse](http://nodejs.org/api/http.html#http_class_http_serverresponse). Most of the methods don't matter as much when using node-scoped-http-client, but of interest are `statusCode` and `getHeader`. Use `statusCode` to check for the HTTP status code, where usually non-200 means something bad happened. Use `getHeader` for peeking at the header, for example to check for rate limiting:
+`res` 는  [http.ServerResponse](http://nodejs.org/api/http.html#http_class_http_serverresponse) 의 인스턴스 입니다. node-scoped-http-client를 사용할 때 대부분의 경우 문제가 발생하지 않지만, `statusCode` 와 `getHeader` 에 관심가져야 합니다. HTTP 상태 코드를 체크하기 위해 `statusCode` 를 사용했는데 보통 200이 아니라면 무언가 나쁜 일이 발생한 것입니다. header 정보를 가져오기 위해 `getHeader` 사용할 수 있는데, 예를 들면 속도 제한을 체크한다면:
 
 ```coffeescript
   robot.http("https://midnight-train")
@@ -148,7 +150,7 @@ A post looks like:
       # rest of your code
 ```
 
-`body` is the response's body as a string, the thing you probably care about the most:
+`body`는 문자로된 응답된 body 이지만, 당신이 더 관심있는 것은:
 
 ```coffeescript
   robot.http("https://midnight-train")
