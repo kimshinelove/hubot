@@ -3,22 +3,20 @@ permalink: /docs/adapters/index.html
 layout: docs
 ---
 
-Adapters are the interface to the service you want your hubot to run on.
+Adapters는 당신의 휴봇이 당신이 원하는 서비스위에 실행되게 하는 인터페이스 입니다.
 
 ## Official Adapters
 
-Hubot includes two official adapters:
+휴봇은 두개의 공식 어댑터를 포함하고 있습니다:
 
-* [Shell](/docs/adapters/shell.md), i.e. for use with development
+* [Shell](/docs/adapters/shell.md), i.e. 개발할때 사용하는 어댑터
 * [Campfire](/docs/adapters/campfire.md)
 
 ## Third-party Adapters
 
-Third-party adapters are available as `npm` packages. Here is a list of known
-adapters, but please [submit an issue](https://github.com/github/hubot/issues)
-to have yours added to the list:
+서드파티 어댑터들은 `npm` 패키지로 사용 할 수 있습니다. 여기 알고 있는 어댑터 리스트가 있지만, 당신이 추가했을때 문제가 있으면 [이슈 등록](https://github.com/github/hubot/issues)을 부탁드립니다:
 
-* [Proxy](https://github.com/Hammertime38/hubot-proxy) - This adapter allows the base application to observe, handle, and control events sent to the proxied adapter, all defined in a config object at the root of the module.
+* [Proxy](https://github.com/Hammertime38/hubot-proxy) - 이 어댑터는 애플리케이션을 관찰, 조절 그리고 컨트롤 이벤트를 프록시 어댑터에 보내는 것이  허용되어 있고 모든것은 모듈의 루트에 설정 객체에 정의되어 있습니다.
 
 * [AIM](https://github.com/shaundubuque/hubot-aim)
 * [ChatWork](https://github.com/akiomik/hubot-chatwork)
@@ -50,4 +48,4 @@ to have yours added to the list:
 
 ## Writing Your Own Adapter
 
-Interested in adding your own adapter? Check out our documentation for [developing adapters](/docs/adapters/development.md)
+당신의 어댑터를 추가하는 것에 관심 있으신가요? [어댑터 개발](/docs/adapters/development.md)하기 위한 우리의 문서를 확인해 보십시오.
