@@ -569,7 +569,7 @@ module.exports = (robot) ->
 
 # Sharing Scripts
 
-Once you've built some new scripts to extend the abilities of your robot friend, you should consider sharing them with the world! At the minimum, you need to package up your script and submit it to the [Node.js Package Registry](http://npmjs.org). You should also review the best practices for sharing scripts below.
+당신의 휴봇의 능력을 확장하는 새로운 스크립트를 만들면, 당신은 그것들을 세계로의 공유를 고려해야 합니다! 최소한, 당신은 당신의 스크립트를 패키징하고 [Node.js Package Registry](http://npmjs.org)에 제출 하는 것이 필요합니다. 당신은 또한 스크립트를 공유하기 위한 최상의 방법을 검토해야 합니다.
 
 ## See if a script already exists
 
