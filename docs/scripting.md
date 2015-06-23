@@ -608,13 +608,13 @@ Creating a script package for hubot is very simple.  Start by installing the `hu
 
 # Listener Metadata
 
-In addition to a regular expression and callback, the `hear` and `respond` functions also accept an optional options Object which can be used to attach arbitrary metadata to the generated Listener object. This metadata allows for easy extension of your script's behavior without modifying the script package.
+정규식과 콜백 이외에, 그 `hear` 와 `respond`은 이미 생성된 리스너 객체로 임의의 메타 데이터를 연결하는데 사용할 수 있는 옵션 객체를 받을 수 있습니다. 이 메타데이터는 스크립트 수정 없이 당신의 스크립트 행동을 쉽게 확장하는 것을 할 수 있게 합니다.
 
-The most important and most common metadata key is `id`. Every Listener should be given a unique name (options.id; defaults to `null`). Names should be scoped by module (e.g. 'my-module.my-listener'). These names allow other scripts to directly address individual listeners and extend them with additional functionality like authorization and rate limiting.
+가장 중요하고 일반적인 메타데이터 키는 `id` 입니다. 모든 리스너는 고유한 이름을 부여해야 합니다(options.id; defaults to `null`). 이름은 모듈명으로 제한해야 합니다(e.g. 'my-module.my-listener'). 이 이름들은 다른 스크립트가 직접 접근하고, 그것들을 인증과 속도제한과 같은 추가적인 기능을 확장할 수 있게 합니다.
 
-Additional extensions may define and handle additional metadata keys.
+추가 확장은 부가적인 메타데이터를 정의하고 처리할 수 있습니다.
 
-Returning to an earlier example:
+다시 앞의 예제로 돌아가서:
 
 ```coffeescript
 module.exports = (robot) ->
@@ -625,6 +625,6 @@ module.exports = (robot) ->
     # code to stop annoying someone
 ```
 
-These scoped identifiers allow you to externally specify new behaviors like:
-- authorization policy: "allow everyone in the `annoyers` group to execute `annoyance.*` commands"
-- rate limiting: "only allow executing `annoyance.start` once every 30 minutes"
+이 범위 식별자는 아래와 같이 외부에서 정의된 새로운 행동을 지정 할 수 있습니다:
+- 인증 정책: "`annoyers` 그룹의 모든 사람은 `annoyance.*` 명령어를 실행 할 수 있습니다."
+- 속도제한: 매 30분에 한번만 `annoyance.start`를 실행할 수 있습니다.
