@@ -162,7 +162,7 @@ post 방식은 아래와 같습니다:
 
 ### JSON
 
-만약 당신이 APIs 에 말한다면, 가장 쉬운방법은 JSON 을 이용하는 것인데 그 이유는 어떤 추가적인 디펜던시가 필요 없기 때문입니다. `robot.http`을 만들어 호출 할때, 당신은 보통 당신이 돌려주기를 기대하는 것에 대한 실마리를 `Accept` 헤더에 API에 전달하기 위한 셋팅을 해야 합니다. 한번 `body`를 받으면, 너는 이것을 `JSON.parse`로 구문 분석을 할 수 있습니다.
+만약 당신이 APIs 에 말한다면, 가장 쉬운방법은 JSON 을 이용하는 것인데 그 이유는 어떤 추가적인 디펜던시가 필요 없기 때문입니다. `robot.http`을 만들어 호출 할때, 당신은 보통 당신이 돌려주기를 기대하는 것에 대한 실마리를 `Accept` 헤더에 API로 전달하기 위한 셋팅을 해야 합니다. 한번 `body`를 받으면, 너는 이것을 `JSON.parse`로 구문 분석을 할 수 있습니다.
 
 ```coffeescript
   robot.http("https://midnight-train")
@@ -198,7 +198,7 @@ post 방식은 아래와 같습니다:
 
 ### XML
 
-XML APIs are harder because there's not a bundled XML parsing library. It's beyond the scope of this documentation to go into detail, but here are a few libraries to check out:
+XML APIs 는 어려운데 그 이유는 XML 구문 분석 라이브러리가 번들로 제공하지 않기 때문입니다. 이것을 자세히 보기에는 이 문서의 범위를 벗어나지만, 여기에 몇가지 라이브러리가 있으니 확인해 보세요:
 
 * [xml2json](https://github.com/buglabs/node-xml2json) (simplest to use, but has some limitations)
 * [jsdom](https://github.com/tmpvar/jsdom) (JavaScript implementation of the W3C DOM)
@@ -206,7 +206,7 @@ XML APIs are harder because there's not a bundled XML parsing library. It's beyo
 
 ### Screen scraping
 
-For those times that there isn't an API, there's always the possibility of screen-scraping. It's beyond the scope of this documentation to go into detail, but here's a few libraries to check out:
+API 가아닌 경우에는, 언제든지 스크린 스크랩핑이 가능합니다. 이것을 자세히 보기에는 이 문서의 범위를 벗어나지만, 여기에 몇가지 라이브러리가 있으니 확인해 보세요:
 
 * [cheerio](https://github.com/MatthewMueller/cheerio) (familiar syntax and API to jQuery)
 * [jsdom](https://github.com/tmpvar/jsdom) (JavaScript implementation of the W3C DOM)
@@ -214,9 +214,9 @@ For those times that there isn't an API, there's always the possibility of scree
 
 ### Advanced HTTP and HTTPS settings
 
-As mentioned, hubot uses [node-scoped-http-client](https://github.com/technoweenie/node-scoped-http-client) to provide a simple interface for making HTTP and HTTP requests. Under its hood, it's using node's builtin [http](http://nodejs.org/api/http.html) and [https](http://nodejs.org/api/https.html) libraries, but providing an easy DSL for the most common kinds of interaction.
+이미 언급한 것 처럼, 휴봇은 HTTP와 HTTP 요청을 만드는 것을 [node-scoped-http-client](https://github.com/technoweenie/node-scoped-http-client) 을 이용해서 간단한 인터페이스를 제공합니다. 그 안에는 노드의 [http](http://nodejs.org/api/http.html) 와 [https](http://nodejs.org/api/https.html) 라이브러리가 포함하고 있지만 일반적인 종류의 인터렉션 구현을 위한 쉬운 DSL 을 제공하고 있습니다. 
 
-If you need to control options on http and https more directly, you pass a second argument to `robot.http` that will be passed on to node-scoped-http-client which will be passed on to http and https:
+만약 당신이 http와 https 의 옵션을 좀 더 직접적으로 제어하는 것이 필요하다면, 당신은 `robot.http`에 node-scoped-http-client에 전달되는 두번째 인수로 전달하면 이것은 http나 https 에 전달되게 될 것입니다:
 
 ```
   options =
@@ -225,11 +225,11 @@ If you need to control options on http and https more directly, you pass a secon
   robot.http("https://midnight-train", options)
 ```
 
-In addition, if node-scoped-http-client doesn't suit you, you can can use [http](http://nodejs.org/api/http.html) and [https](http://nodejs.org/api/https.html) yourself directly, or any other node library like [request](https://github.com/request/request).
+추가적으로, 만약 node-scoped-http-client 가 당신에 맞게 제대로 작동하지 않는다면 당신은 [http](http://nodejs.org/api/http.html) 와 [https](http://nodejs.org/api/https.html) 을 스스로 직접 사용하거나, [request](https://github.com/request/request)와 같은 어떤 다른 노드 라이브러리를 사용 할 수 있습니다.
 
 ## Random
 
-A common pattern is to hear or respond to commands, and send with a random funny image or line of text from an array of possibilities. It's annoying to do this in JavaScript and CoffeeScript out of the box, so Hubot includes a convenience method:
+일반적인 패턴은 명령어에 듣거나 응답하고, 랜덤한 재미있는 이미지를 보내거나 사용 가능한 배열에서 텍스트를 라인에 보낼 수 있습니다. 자바스크립트와 커피스크립트로 할 수 있지만 성가신 것을 휴봇에서는 편리한 메소드로 포함하고 있습니다.
 
 ```coffeescript
 lulz = ['lol', 'rofl', 'lmao']
@@ -239,7 +239,7 @@ res.send res.random lulz
 
 ## Topic
 
-Hubot can react to a room's topic changing, assuming that the adapter supports it.
+휴봇은 어댑터가 지원을 한다면 토픽이 변경되는 것에 반응 할 수 있습니다.
 
 ```coffeescript
 module.exports = (robot) ->
@@ -249,7 +249,7 @@ module.exports = (robot) ->
 
 ## Entering and leaving
 
-Hubot can see users entering and leaving, assuming that the adapter supports it.
+휴봇은 사용자가 들어오거나, 나가는 것을 어댑터가 지원한다면 볼 수 있습니다.
 
 ```coffeescript
 enterReplies = ['Hi', 'Target Acquired', 'Firing', 'Hello friend.', 'Gotcha', 'I see you']
@@ -264,7 +264,7 @@ module.exports = (robot) ->
 
 ## Environment variables
 
-Hubot can access the environment he's running in, just like any other node program, using [`process.env`](http://nodejs.org/api/process.html#process_process_env). This can be used to configure how scripts are run, with the convention being to use the `HUBOT_` prefix.
+휴봇은 그가 실행되는 동안 다른 노드 프로그램과 같이 [`process.env`](http://nodejs.org/api/process.html#process_process_env) 를 이용해서 환경에 접근 할 수 있습니다. 이것은 `HUBOT_` 프리픽스로 시작하는 컨벤션과 함께 어떻게 스크립트를 실행할지 설정할 수 있습니다.
 
 ```coffeescript
 answer = process.env.HUBOT_ANSWER_TO_THE_ULTIMATE_QUESTION_OF_LIFE_THE_UNIVERSE_AND_EVERYTHING
@@ -274,9 +274,9 @@ module.exports = (robot) ->
     res.send "#{answer}, but what is the question?"
 ```
 
-Take care to make sure the script can load if it's not defined, give the Hubot developer notes on how to define it, or default to something. It's up to the script writer to decide if that should be a fatal error (e.g. hubot exits), or not (make any script that relies on it to say it needs to be configured. When possible and when it makes sense to, having a script work without any other configuration is preferred.
+만약 이것이 정의되지 않았을때 휴봇 개발자에게 어떻게 정의되어야 하는지 주거나, 기본적인 어떤 것을 실행하도록 만들 수 있습니다. 만약 치명적인 에러(e.g. 휴봇 종료)가 발생했을 경우, 또는 만들고 있는 스크립트가 어떤 설정이 필요한지 말해주거나 하는 것은 스크립트 작성자에게 달려 있습니다. 가능하다면 어떠한 다른 설정 없이 작동하는 스크립트를 만드는 것을 선호합니다.
 
-Here we can default to something:
+여기 우리가 기본적인 무언가를 하는 것이 있습니다:
 
 ```coffeescript
 answer = process.env.HUBOT_ANSWER_TO_THE_ULTIMATE_QUESTION_OF_LIFE_THE_UNIVERSE_AND_EVERYTHING or 42
@@ -286,7 +286,7 @@ module.exports = (robot) ->
     res.send "#{answer}, but what is the question?"
 ```
 
-Here we exit if it's not defined:
+여기 만약 정의되지 않았다면 우리가 종료하는 것이 있습니다:
 
 ```coffeescript
 answer = process.env.HUBOT_ANSWER_TO_THE_ULTIMATE_QUESTION_OF_LIFE_THE_UNIVERSE_AND_EVERYTHING
@@ -299,7 +299,7 @@ module.exports = (robot) ->
     res.send "#{answer}, but what is the question?"
 ```
 
-And lastly, we update the `robot.respond` to check it:
+그리고 마지막으로, 우리가 `robot.respond` 를 업데이트하는 것을 확인해 보세요:
 
 ```coffeescript
 answer = process.env.HUBOT_ANSWER_TO_THE_ULTIMATE_QUESTION_OF_LIFE_THE_UNIVERSE_AND_EVERYTHING
@@ -314,7 +314,7 @@ module.exports = (robot) ->
 
 ## Dependencies
 
-Hubot uses [npm](https://github.com/isaacs/npm) to manage its dependencies. To add additional packages, add them to `dependencies` in `package.json`. For example, to add lolimadeupthispackage 1.2.3, it'd look like:
+휴봇은 [npm](https://github.com/isaacs/npm)을 사용해서 이것의 의존성을 관리합니다. 추가적인 패키지를 추가하려면 `package.json`안에 `dependencies` 에 그것들을 추가하면 됩니다. 예를 들어 lolimadeupthispackage 1.2.3 를 추가 하려면 다음과 같습니다:
 
 ```json
   "dependencies": {
@@ -323,11 +323,12 @@ Hubot uses [npm](https://github.com/isaacs/npm) to manage its dependencies. To a
   },
 ```
 
-If you are using scripts from hubot-scripts, take note of the `Dependencies` documentation in the script to add. They are listed in a format that can be copy & pasted into `package.json`, just make sure to add commas as necessary to make it valid JSON.
+만약 당신이 hubot-scripts 에서 스크립트를 사용한다면, `Dependencies` 문서에서 스크립트 설명서를 살펴보세요. 그것들은 `package.json` 에 복사해서 붙여넣을 수 있게 정리되어 있으나, 단지 유효한 JSON 형태로 콤마로 구분되어 있는지 확인이 필요합니다.
 
 # Timeouts and Intervals
 
-Hubot can run code later using JavaScript's built-in [setTimeout](http://nodejs.org/api/timers.html#timers_settimeout_callback_delay_arg). It takes a callback method, and the amount of time to wait before calling it:
+휴봇은 자바스크립트에 포함된 [setTimeout](http://nodejs.org/api/timers.html#timers_settimeout_callback_delay_arg) 를 이용해서 이후에 실행 할 수 있습니다.
+이 콜백 메소드를 보면, 호출 되기 전에 일정 시간을 기다립니다:
 
 ```coffeescript
 module.exports = (robot) ->
@@ -337,7 +338,8 @@ module.exports = (robot) ->
     , 60 * 1000
 ```
 
-Additionally, Hubot can run code on an interval using [setInterval](http://nodejs.org/api/timers.html#timers_setinterval_callback_delay_arg). It takes a callback method, and the amount of time to wait between calls:
+추가적으로, 휴봇은  [setInterval](http://nodejs.org/api/timers.html#timers_setinterval_callback_delay_arg)를 이용해서 코드를 반복 할 수 있습니다.
+이 콜백 메소드를 보면, 일정시간 마다 호출 됩니다:
 
 ```coffeescript
 module.exports = (robot) ->
@@ -348,7 +350,7 @@ module.exports = (robot) ->
     , 1000
 ```
 
-Both `setTimeout` and `setInterval` return the ID of the timeout or interval it created. This can be used to to `clearTimeout` and `clearInterval`.
+`setTimeout`와 `setInterval` 모두 timeout 또는 interval 이 만들어진 ID 를 리턴합니다. 이것은 `clearTimeout`과 `clearInterval` 에 사용 할 수 있습니다.
 
 ```coffeescript
 module.exports = (robot) ->
@@ -375,10 +377,9 @@ module.exports = (robot) ->
 
 ## HTTP Listener
 
-Hubot includes support for the [express](http://expressjs.com) web framework to serve up HTTP requests. It listens on the port specified by the `EXPRESS_PORT` or `PORT` environment variables (preferred in that order) and defaults to 8080. An instance of an express application is available at `robot.router`. It can be protected with username and password by specifying `EXPRESS_USER` and `EXPRESS_PASSWORD`. It can automatically serve static files by setting `EXPRESS_STATIC`.
+휴봇은 HTTP 요청을 지원하기 위해 [express](http://expressjs.com) 웹 프레임워크를 포함하고 있습니다. 이것은 `EXPRESS_PORT` 나 `PORT` 환경 변수 (preferred in that order) 로 지정되어 있는 특정 포트위를 listen 하고 있고 기본 포트는 8080 입니다. express 응용 프로그램의 인스턴스는 `robot.router` 로 사용 가능 합니다. 이것은 `EXPRESS_USER` and `EXPRESS_PASSWORD` 로 지정된 username 과 password 로 보호될 수 있습니다. 이것은 자동으로 `EXPRESS_STATIC` 로 셋팅된 파일을 서비스 할 수 있습니다.
 
-The most common use of this is for providing HTTP end points for services with webhooks to push to, and have those show up in chat.
-
+이것은 webhooks 에 밀어넣고, 채팅에 표시하기 위한 서비스를 위해 HTTP 엔드 포인트를 제공하는 용도로 가장 많이 사용합니다.
 
 ```coffeescript
 module.exports = (robot) ->
@@ -392,7 +393,8 @@ module.exports = (robot) ->
     res.send 'OK'
 ```
 
-Test it with curl; also see section on [error handling](#error-handling) below.
+curl 로 테스트를 해보면; 또한 [error handling](#error-handling) 이하 부분을 보세요.
+
 ```shell
 // raw json, must specify Content-Type: application/json
 curl -X POST -H "Content-Type: application/json" -d '{"secret":"C-TECH Astronomy"}' http://127.0.0.1:8080/hubot/chatsecrets/general
@@ -401,13 +403,13 @@ curl -X POST -H "Content-Type: application/json" -d '{"secret":"C-TECH Astronomy
 curl -d 'payload=%7B%22secret%22%3A%22C-TECH+Astronomy%22%7D' http://127.0.0.1:8080/hubot/chatsecrets/general
 ```
 
-All endpoint URLs should start with the literal string `/hubot` (regardless of what your robot's name is). This consistency makes it easier to set up webhooks (copy-pasteable URL) and guarantees that URLs are valid (not all bot names are URL-safe).
+모든 엔트포인트 URL들은 `/hubot`와 동일한 문자로 시작해야 합니다(당신의 로봇의 이름과 관계 없이). 이러한 일관성은 URL이 (모든 봇 이름, URL 안전에) 유효하다는 것을 보증하고, 쉽게 webhooks (URL 을 복사 붙여넣어서) 을 설정할 수 있습니다.
 
 ## Events
 
-Hubot can also respond to events which can be used to pass data between scripts. This is done by encapsulating node.js's [EventEmitter](http://nodejs.org/api/events.html#events_class_events_eventemitter) with `robot.emit` and `robot.on`.
+휴봇은 스크립트간에 데이터를 주고받기 위한 이벤트에도 응답할 수 있습니다. 이것은 `robot.emit` 와 `robot.on` 함께 node.js [EventEmitter](http://nodejs.org/api/events.html#events_class_events_eventemitter) 로 캡슐화 되어 있습니다.
 
-One use case for this would be to have one script for handling interactions with a service, and then emitting events as they come up. For example, we could have a script that receives data from a GitHub post-commit hook, make that emit commits as they come in, and then have another script act on those commits.
+하나의 사용 예로 서비스와 상호작용을 처리한다음 그들이 온 이벤트에 다시 발송하는 하나의 스크립트를 가질 것입니다. 예를 들어, 우리는 GitHub의 post-commit hook 데이터가 올때 커밋 데이터를 방출하고, 그 다음에 다른 스크립트에서 행동을 취하는 스크립트가 있습니다.
 
 ```coffeescript
 # src/scripts/github-commits.coffee
@@ -428,11 +430,12 @@ module.exports = (robot) ->
     #deploy code goes here
 ```
 
-If you provide an event, it's highly recommended to include a hubot user or room object in its data. This would allow for hubot to notify a user or room in chat.
+당신이 이벤트를 제공한다면, 휴봇 사용자나 룸 객체를 데이터에 포함시키는 것이 좋습니다. 
+이것은 휴봇에게 대화방 내의 사용자나 대화방에 알림을 하는 것을 허용해 줍니다.
 
 ## Error Handling
 
-No code is perfect, and errors and exceptions are to be expected. Previously, an uncaught exceptions would crash your hubot instance. Hubot now includes an `uncaughtException` handler, which provides hooks for scripts to do something about exceptions.
+어떤 코드든 완벽하지 않고, 에러와, 예외 상황이 발생하는 것을 예상할 수 있습니다. 이전에 처리되지 않은 예외 상황은 당신의 휴봇 인스턴스를 강제 종료 될 것입니다. 휴봇은 현재 어떤 스크립트의 예외상황에 대해 무언가 액션을 취하기 위한 `uncaughException` 핸들러를 포함하고 있습니다.
 
 ```coffeescript
 # src/scripts/does-not-compute.coffee
@@ -444,11 +447,12 @@ module.exports = (robot) ->
       res.reply "DOES NOT COMPUTE"
 ```
 
-You can do anything you want here, but you will want to take extra precaution of rescuing and logging errors, particularly with asynchronous code. Otherwise, you might find yourself with recursive errors and not know what is going on.
+당신은 여기에 당신이 원하는 어떤것이든 할 수 있습니다. 그러나 당신이 별도의 주의사항과 에러 로깅, 특별한 처리를 원한다면 비동기 코드로 작성해야 합니다.
+그렇지 않으면, 당신은 스스로 재귀오류와 알지 못하는 무언가를 발견하게 될 것입니다.
 
-Under the hood, there is an 'error' event emitted, with the error handlers consuming that event. The uncaughtException handler [technically leaves the process in an unknown state](http://nodejs.org/api/process.html#process_event_uncaughtexception). Therefore, you should rescue your own exceptions whenever possible, and emit them yourself. The first argument is the error emitted, and the second argument is an optional message that generated the error.
+숨겨진 곳에 'error' 이벤트를 방출되고 에러 핸들러와 함께 이벤트를 소비하고 있습니다. 그 uncaughtException 핸들러는 [technically leaves the process in an unknown state](http://nodejs.org/api/process.html#process_event_uncaughtexception). 따라서 당신은 언제어디서든지 당신의 예외사항을 구해서 그 스스로 이벤트를 방출 해야 합니다. 그 첫번째 인자는 그 에러를 방출하고, 두번째 인자는 에러가 생성될때 추가적인 메시지입니다.
 
-Using previous examples:
+앞의 예시를 보면:
 
 ```coffeescript
   robot.router.post '/hubot/chatsecrets/:room', (req, res) ->
@@ -472,11 +476,11 @@ Using previous examples:
         # rest of code here
 ```
 
-For the second example, it's worth thinking about what messages the user would see. If you have an error handler that replies to the user, you may not need to add a custom message and could send back the error message provided to the `get()` request, but of course it depends on how public you want to be with your exception reporting.
+두번째 예제는, 가치가 있다고 생각되는 메시지를 사용자가 볼 것 입니다. 만약 당신이 사용자에게 답변을 하는 에러 핸들러를 가지고 있다면, 당신은 별도의 메시지를 추가할 필요 없이 `get()` 요청에서 제공하고 있는 에러 메시지를 그대로 되돌려 보낼 수 있습니다. 하지만 당신이 당신의 에러 리포트를 어떻게 공개하기를 원하는지에 달려있습니다. 
 
 ## Documenting Scripts
 
-Hubot scripts can be documented with comments at the top of their file, for example:
+휴봇 스크립트는 그 파일들의 맨 위에 위치한 주석으로 문서화 할 수 있습니다. 예를 들면:
 
 ```coffeescript
 # Description:
@@ -499,23 +503,21 @@ Hubot scripts can be documented with comments at the top of their file, for exam
 #   <github username of the original script author>
 ```
 
-The most important and user facing of these is `Commands`. At load time, Hubot looks at the `Commands` section of each scripts, and build a list of all commands. The included `help.coffee` lets a user ask for help across all commands, or with a search. Therefore, documenting the commands make them a lot more discoverable by users.
+가장 중요하고 사용자가 직면하게 될 것은 `Commands`입니다. 로드 시점에, 휴봇은 각 스크립트의 `Commands` 부분을 찾고 모든 명령어를 생성합니다. 포함되어 있는 `help.coffee`는 사용자가 명령어를 통해 질문하거나 검색 할 수 있습니다. 따라서 문서화 하는 것은 명령어를 만들때 사용자로 하여 좀 더 많이 검색 될 수 있도록 합니다.
 
-When documenting commands, here are some best practices:
+명령어가 문서화 될때, 여기에 좋은 사례가 있습니다:
 
-* Stay on one line. Help commands get sorted, so would insert the second line at an unexpected location, where it probably won't make sense.
-* Refer to the Hubot as hubot, even if your hubot is named something else. It will automatically be replaced with the correct name. This makes it easier to share scripts without having to update docs.
-* For `robot.respond` documentation, always prefix with `hubot`. Hubot will automatically replace this with your robot's name, or the robot's alias if it has one
-* Check out how man pages document themselves. In particular, brackets indicate optional parts, '...' for any number of arguments, etc.
+* 한줄로 유지하라. Help 명령어는 정렬하기 때문에, 예기치 못하게 두번째 라인에 추가된 예외사항을 이해할 수 없을 것 입니다.
+* 당신의 휴봇이 다른 이름을 가지고 있더라도 Hubot을 이용해 참조하십시오. 이것은 자동으로 일치하는 이름으로 변경 될 것입니다. 이것은 업데이트된 문서 없이 스크립트를 공유하기 쉽게 만들어 줍니다.
+* `robot.respond` 문서는 항상 `hubot` 접두사와 함께 하십시오. 휴봇은 자동으로 당신의 로봇 이름이나 로봇의 별명을 가지고 있다면 그것으로 변경할 것입니다.
+* man 페이지들을 문서화를 어떻게 하는지 확인 하세요. 특히, 괄호 표시는 옵션을 표시하고, '...' 는 인자의 어떤 숫자, 기타 등등.
 
-The other sections are more relevant to developers of the bot, particularly dependencies, configuration variables, and notes. All contributions to [hubot-scripts](https://github.com/github/hubot-scripts) should include all these sections that are related to getting up and running with the script.
-
+다른 부분은 봇 개발과 관련되고, 특히 디펜던시, 변수 구성 그리고 메모입니다. [hubot-scripts](https://github.com/github/hubot-scripts)에 기여된 모든 스크립트들은 스크립트와 함께 실행하거나 연관된 모든 부분을 포함해야 합니다.
 
 
 ## Persistence
 
-Hubot has an in-memory key-value store exposed as `robot.brain` that can be
-used to store and retrieve data by scripts.
+휴봇은 메모리에 저장소로 사용하고, 데이터를 검색 할 수 있는 키-값으로 이루어진 `robot.brain` 을 가지고 있습니다.
 
 ```coffeescript
 robot.respond /have a soda/i, (res) ->
@@ -534,7 +536,8 @@ robot.respond /sleep it off/i, (res) ->
   msg.reply 'zzzzz'
 ```
 
-If the script needs to lookup user data, there are methods on `robot.brain` for looking up one or many users by id, name, or 'fuzzy' matching of name: `userForName`, `userForId`, `userForFuzzyName`, and `usersForFuzzyName`.
+만약 스크립트가 사용자 데이터를 찾는 것이 필요하다면, 아이디, 이름, 이름의 부분이 매칭으로 한명 또는 많은 사용자를 찾기 위한 방법이 `robot.brain` 에 있습니다:
+`userForName`, `userForId`, `userForFuzzyName`, and `usersForFuzzyName`.
 
 ```coffeescript
 module.exports = (robot) ->
@@ -552,13 +555,13 @@ module.exports = (robot) ->
 
 ## Script Loading
 
-There are three main sources to load scripts from:
+여기에 스크립트들을 로드하기 위한 세가지 중요한 방법이 있습니다:
 
-* all scripts __bundled__ with your hubot installation under `scripts/` directory
-* __community scripts__ specified in `hubot-scripts.json` and shipped in the `hubot-scripts` npm package
-* scripts loaded from external __npm packages__ and specified in `external-scripts.json`
+* 당신의 휴봇이 설치되어 있는 곳 아래에 `scripts/` 디렉토리 내에 있는 모든 스크립트 __bundled__
+* `hubot-scripts.json`과 npm bozlwldp `hubot-scripts` 가 포함된 __community scripts__
+* 외부 __npm packages__ 와 `external-scripts.son` 안에 정의되어 있는 스크립트들
 
-Scripts loaded from the `scripts/` directory are loaded in alphabetical order, so you can expect a consistent load order of scripts. For example:
+스크립트들은 `scripts/` 디렉토리에서 알파벳 순서대로 로드되기 때문에, 당신은 일관된 순서로 로드되길 기대할 수도 있습니다. 예를 들면:
 
 * `scripts/1-first.coffee`
 * `scripts/_second.coffee`
