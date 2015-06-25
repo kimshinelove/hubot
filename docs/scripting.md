@@ -604,7 +604,8 @@ Creating a script package for hubot is very simple.  Start by installing the `hu
 % git commit -m "Initial commit"
 ```
 
-당신은 이제 돌아갈 준비가 된 휴봇 스크립트 저장소를 가지고 있습니다! Feel free to crack open the pre-created `src/awesome-script.coffee` file and start building up your script! When you've got it ready, you can publish it to [npmjs](http://npmjs.org) by [following their documentation](https://docs.npmjs.com/getting-started/publishing-npm-packages)!
+당신은 이제 돌아갈 준비가 된 휴봇 스크립트 저장소를 가지고 있습니다! 미리 만들어진 `src/awesome-script.coffee` 을 열고 당신만의 스크립트를 만들어 보세요!
+당신이 준비가 된다면, 당신은 이것을 [이 문서를 따라서](https://docs.npmjs.com/getting-started/publishing-npm-packages) [npmjs](http://npmjs.org)에 게시할 수 있습니다!
 
 # Listener Metadata
 
